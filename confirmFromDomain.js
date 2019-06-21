@@ -15,3 +15,13 @@ exports.handler = (event, context, callback) => {
     // Return to Amazon Cognito
     callback(null, event);
 };
+
+/*
+To use:
+
+send an attribute with the signUp for your custom domain:
+
+"custom:domain": "example.com"
+
+If the custom domain matches the user's email address, the confirmation will be taken care of automatically.
+*/
