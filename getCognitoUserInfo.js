@@ -46,7 +46,7 @@ exports.handler = async event => {
     })
   } catch (err) {
     res.json({
-      error: JSON.stringify(err)
+      error: err
     })
   }
 }
