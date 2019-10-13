@@ -34,6 +34,11 @@ async function canPerformAction(event, group) {
 }
 
 exports.handler = async event => {
+  if (!event.requestContext.identity.cognitoAuthenticationProvider) {
+    return res.json({
+      error: 'not authorized to perform this action'
+    })
+  }
   try {
     await canPerformAction(event, 'Admin')
     res.json({
