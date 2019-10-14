@@ -39,12 +39,9 @@ async function canPerformAction(event, group) {
 exports.handler = async event => {
   try {
     await canPerformAction(event, 'Admin')
-    res.json({
-      success: 'performing action'
-    })
+    // do something
+    return { success: 'performing action' }
   } catch (err) {
-    res.json({
-      error: err
-    })
+    return { error: err }
   }
 }
