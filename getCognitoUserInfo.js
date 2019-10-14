@@ -23,6 +23,9 @@ async function getGroupsForUser(event) {
 
 async function canPerformAction(event, group) {
   return new Promise(async (resolve, reject) => {
+    if (!event.requestContext.identity.cognitoAuthenticationProvider) {
+      return reject('not authorized to perform this action')
+    }
     const groupData = await getGroupsForUser(event)
     const groupsForUser = groupData.Groups.map(group => group.GroupName)
     if (groupsForUser.includes(group)) {
@@ -34,11 +37,6 @@ async function canPerformAction(event, group) {
 }
 
 exports.handler = async event => {
-  if (!event.requestContext.identity.cognitoAuthenticationProvider) {
-    return res.json({
-      error: 'not authorized to perform this action'
-    })
-  }
   try {
     await canPerformAction(event, 'Admin')
     res.json({
