@@ -16,7 +16,7 @@ async function getGroupsForUser(event) {
     UserPoolId: userpoolId,
     Username: user.Username
   }
-  const groupData = cognito.adminListGroupsForUser(groupParams).promise()
+  const groupData = await cognito.adminListGroupsForUser(groupParams).promise()
   // returns the group data
   return groupData
 }
